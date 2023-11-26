@@ -2,6 +2,7 @@ import React, { useState, useEffect } from 'react';
 import { geoCentroid } from "d3-geo";
 import { ComposableMap, Geographies, Geography, Annotation, Marker } from 'react-simple-maps';
 import ReactECharts from 'echarts-for-react';
+import chroma from 'chroma-js';
 
 const geoUrl = "https://cdn.jsdelivr.net/npm/us-atlas@3/states-10m.json";
 
@@ -145,6 +146,18 @@ const mannerOfDeathData = {
     'Shot and Tasered': 4000
 };
 
+const fleeData = {
+    'Car': 3000,
+    'Foot': 2000,
+    'Other': 1000,
+    'Not Fleeing': 4000
+};
+
+const mentalIllnessData = {
+    'TRUE': 3000,
+    'FALSE': 7000
+};
+
 function State() {
     const maxMurder = Math.max(...Object.values(murderData));
     const [selectedYears, setSelectedYears] = useState(['2015', '2016', '2017']);
@@ -182,7 +195,7 @@ function State() {
                     { value: crimeData['Male'], name: 'Male' },
                     { value: crimeData['Female'], name: 'Female' }
                 ],
-                color: ['green', 'red'],
+                color: chroma.scale(['#2c3e50', '#ecf0f1']).mode('lch').colors(2),
                 emphasis: {
                     itemStyle: {
                         shadowBlur: 10,
@@ -212,7 +225,7 @@ function State() {
                 type: 'pie',
                 radius: '50%',
                 data: Object.entries(raceCrimeData).map(([name, value]) => ({ name, value })),
-                color: ['green', 'red', 'blue', 'yellow', 'purple'],
+                color: chroma.scale(['#2c3e50', '#ecf0f1']).mode('lch').colors(5),
                 emphasis: {
                     itemStyle: {
                         shadowBlur: 10,
@@ -242,7 +255,71 @@ function State() {
                 type: 'pie',
                 radius: '50%',
                 data: Object.entries(mannerOfDeathData).map(([name, value]) => ({ name, value })),
-                color: ['blue', 'orange'],
+                color: chroma.scale(['#2c3e50', '#ecf0f1']).mode('lch').colors(2),
+                emphasis: {
+                    itemStyle: {
+                        shadowBlur: 10,
+                        shadowOffsetX: 0,
+                        shadowColor: 'rgba(0, 0, 0, 0.5)'
+                    }
+                }
+            }
+        ]
+    };
+
+    const fleeOption = {
+        title: {
+            text: 'Flee Data',
+            left: 'center'
+        },
+        tooltip: {
+            trigger: 'item'
+        },
+        legend: {
+            orient: 'vertical',
+            left: 'left'
+        },
+        series: [
+            {
+                name: 'Flee By',
+                type: 'pie',
+                radius: '50%',
+                data: Object.entries(fleeData).map(([name, value]) => ({ name, value })),
+                color: chroma.scale(['#2c3e50', '#ecf0f1']).mode('lch').colors(4),
+                emphasis: {
+                    itemStyle: {
+                        shadowBlur: 10,
+                        shadowOffsetX: 0,
+                        shadowColor: 'rgba(0, 0, 0, 0.5)'
+                    }
+                }
+            }
+        ]
+    };
+
+    const mentalIllnessOption = {
+        title: {
+            text: 'Mental Illness Data',
+            left: 'center'
+        },
+        tooltip: {
+            trigger: 'item',
+            formatter: function(params) {
+                return params.name === 'TRUE' ? 'Yes: ' + params.value : 'No: ' + params.value;
+            }
+        },
+        legend: {
+            orient: 'vertical',
+            left: 'left',
+            data: ['Yes', 'No']
+        },
+        series: [
+            {
+                name: 'Mental Illness',
+                type: 'pie',
+                radius: '50%',
+                data: Object.entries(mentalIllnessData).map(([name, value]) => ({ name: name === 'TRUE' ? 'Yes' : 'No', value })),
+                color: chroma.scale(['#2c3e50', '#ecf0f1']).mode('lch').colors(2),
                 emphasis: {
                     itemStyle: {
                         shadowBlur: 10,
@@ -333,6 +410,14 @@ function State() {
                     </div>
                     <div style={{ height: '20%' }}>
                         <ReactECharts option={mannerOfDeathOption} />
+                    </div>
+                </div>
+                <div style={{ width: '25%', height: '40%' }}>
+                    <div style={{ height: '20%' }}>
+                        <ReactECharts option={fleeOption} />
+                    </div>
+                    <div style={{ height: '20%' }}>
+                        <ReactECharts option={mentalIllnessOption} />
                     </div>
                 </div>
             </div>
