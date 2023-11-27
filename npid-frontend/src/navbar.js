@@ -8,6 +8,7 @@ class Navbar extends Component {
             <div className="navbar">
                 <nav>
                     <ul>
+                        <li><Link to="/">Home</Link></li>
                         <li><Link to="/State">State</Link></li>
                         <li><Link to="/state-city">State-City</Link></li>
                         <li><Link to="/temporal">Temporal</Link></li>

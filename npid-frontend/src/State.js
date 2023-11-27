@@ -352,7 +352,7 @@ function State() {
             </div>
             <div style={{ display: 'flex', flexDirection: 'row', alignItems: 'center' }}>
                 
-                <div style={{ width: '45%' }}>
+                <div style={{ width: '50%' }}>
                     <ComposableMap projection="geoAlbersUsa">
                         <Geographies geography={geoUrl}>
                             {({ geographies }) => (
