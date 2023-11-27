@@ -9,7 +9,7 @@ class Navbar extends Component {
                 <nav>
                     <ul>
                         <li><Link to="/">Home</Link></li>
-                        <li><Link to="/State">State</Link></li>
+                        <li><Link to="/state">State</Link></li>
                         <li><Link to="/state-city">State-City</Link></li>
                         <li><Link to="/temporal">Temporal</Link></li>
                         <li><Link to="/detailed">Detailed</Link></li>

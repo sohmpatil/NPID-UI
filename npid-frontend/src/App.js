@@ -5,6 +5,7 @@ import State from './State';
 import StateCitySelector from './State-City';
 import Home from './Home';
 import DeathChart from './Temporal';
+import Detailed from './Detailed';
 
 function App() {
   return (
@@ -13,9 +14,10 @@ function App() {
         <Navbar/>
         <Routes>
           <Route path="/" element={<Home />} />
-          <Route path="/State" element={<State />} />
+          <Route path="/state" element={<State />} />
           <Route path="/state-city" element={<StateCitySelector/>} />
           <Route path="/temporal" element={<DeathChart/>} />
+          <Route path="/detailed" element={<Detailed/>} />
         </Routes>
       </div>
     </Router>
