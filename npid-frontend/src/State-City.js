@@ -377,7 +377,7 @@ function StateCitySelector() {
     yAxis: [
       {
         type: 'value',
-        name: 'Poverty Rate & HS Completion',
+        name: 'Median Income',
       },
       {
         type: 'value',
