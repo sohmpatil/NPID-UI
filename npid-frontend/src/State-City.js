@@ -73,6 +73,10 @@ function StateCitySelector() {
     },
     xAxis: [
       {
+        name: 'City Names',
+        axisLabel: {
+            show: true
+        },
         type: 'category',
         axisTick: { show: false },
         data: statesAndCities[selectedState].map((cityData) => cityData.city)
@@ -80,6 +84,10 @@ function StateCitySelector() {
     ],
     yAxis: [
       {
+        name: 'Percentage',
+        axisLabel: {
+            show: true
+        },
         type: 'value',
         height: '500px'
       }
@@ -180,6 +188,10 @@ function StateCitySelector() {
     },
     xAxis: [
       {
+        name: 'City Names',
+        axisLabel: {
+            show: true
+        },
         type: 'category',
         axisTick: { show: false },
         data: statesAndCitiesDeath[selectedState].map((cityData) => cityData.city)
@@ -187,6 +199,10 @@ function StateCitySelector() {
     ],
     yAxis: [
       {
+        name: 'Percentage',
+        axisLabel: {
+            show: true
+        },
         type: 'value',
         height: '500px'
       }
