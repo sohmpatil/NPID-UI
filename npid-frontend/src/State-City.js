@@ -3,57 +3,181 @@ import ReactECharts from 'echarts-for-react';
 import './StateCitySelector.css';
 import chroma from 'chroma-js';
 
-const data = [
-  { city: 'CA - Napa', state: 'CA', share_white: 75.1, share_black: 0.6, share_native_american: 0.8, share_asian: 2.3, share_hispanic: 27.6},
-  { city: 'CO - Grand Junction', state: 'CO', share_white: 88.7, share_black: 0.8, share_native_american: 1, share_asian: 1.1, share_hispanic: 13.9},
-  { city: 'NY - Greece', state: 'NY', share_white: 88.2, share_black: 5.4, share_native_american: 0.3, share_asian: 2.4, share_hispanic: 5.4},
-  { city: 'CA - NAPLES', state: 'CA', share_white: 75.1, share_black: 0.6, share_native_american: 0.8, share_asian: 2.3, share_hispanic: 37.6},
-  { city: 'CO - GrandJunction2', state: 'CO', share_white: 88.7, share_black: 0.8, share_native_american: 1, share_asian: 1.1, share_hispanic: 13.9},
-  { city: 'NY - Greececa', state: 'NY', share_white: 88.2, share_black: 5.3, share_native_american: 0.3, share_asian: 2.4, share_hispanic: 5.4},
-  { city: 'CA - Napa3', state: 'CA', share_white: 75.1, share_black: 0.6, share_native_american: 0.8, share_asian: 2.3, share_hispanic: 37.6},
-  { city: 'CO - Grand Junction3', state: 'CO', share_white: 88.7, share_black: 0.8, share_native_american: 1, share_asian: 1.1, share_hispanic: 13.9},
-  { city: 'NY - Greece3', state: 'NY', share_white: 88.2, share_black: 5.2, share_native_american: 0.3, share_asian: 2.4, share_hispanic: 5.4},
-  { city: 'CA - NAPLES4', state: 'CA', share_white: 75.1, share_black: 0.6, share_native_american: 0.8, share_asian: 2.3, share_hispanic: 37.6},
-  { city: 'CO - GrandJunction24', state: 'CO', share_white: 88.7, share_black: 0.8, share_native_american: 1, share_asian: 1.1, share_hispanic: 13.9},
-];
+import PopulationChart from './StateCityComponents/PopulationChart';
+import PovertyGradChart from './StateCityComponents/PovertyGradChart';
+import IncomeChart from './StateCityComponents/IncomeChart';
+
+
 const data_death = [
-    { city: 'CA - Napa', state: 'CA', share_white: 72.1, share_black: 0.6, share_native_american: 0.8, share_asian: 2.3, share_hispanic: 27.6},
-    { city: 'CO - Grand Junction', state: 'CO', share_white: 82.7, share_black: 0.8, share_native_american: 1, share_asian: 1.1, share_hispanic: 13.9},
-    { city: 'NY - Greece', state: 'NY', share_white: 82.2, share_black: 5.4, share_native_american: 0.3, share_asian: 2.4, share_hispanic: 5.4},
-    { city: 'CA - NAPLES', state: 'CA', share_white: 72.1, share_black: 0.6, share_native_american: 0.8, share_asian: 2.3, share_hispanic: 37.6},
-    { city: 'CO - GrandJunction2', state: 'CO', share_white: 82.7, share_black: 0.8, share_native_american: 1, share_asian: 1.1, share_hispanic: 13.9},
-    { city: 'NY - Greececa', state: 'NY', share_white: 82.2, share_black: 5.3, share_native_american: 0.3, share_asian: 2.4, share_hispanic: 5.4},
-    { city: 'CA - Napa3', state: 'CA', share_white: 72.1, share_black: 0.6, share_native_american: 0.8, share_asian: 2.3, share_hispanic: 37.6},
-    { city: 'CO - Grand Junction3', state: 'CO', share_white: 82.7, share_black: 0.8, share_native_american: 1, share_asian: 1.1, share_hispanic: 13.9},
-    { city: 'NY - Greece3', state: 'NY', share_white: 82.2, share_black: 5.2, share_native_american: 0.3, share_asian: 2.4, share_hispanic: 5.4},
-    { city: 'CA - NAPLES4', state: 'CA', share_white: 72.1, share_black: 0.6, share_native_american: 0.8, share_asian: 2.3, share_hispanic: 37.6},
-    { city: 'CO - GrandJunction24', state: 'CO', share_white: 82.7, share_black: 0.8, share_native_american: 1, share_asian: 1.1, share_hispanic: 13.9},
-];
-
-const data_poverty_hs = [
-    {city: 'CA - Napa', state: 'CA', poverty_rate: 10.1, percent_completed_hs: 55.1, deaths: 120},
-    {city: 'CA - Napa2', state: 'CA', poverty_rate: 10.2, percent_completed_hs: 55.2, deaths: 122},
-    {city: 'CA - Napa3', state: 'CA', poverty_rate: 10.3, percent_completed_hs: 55.3, deaths: 123},
-    {city: 'CA - Napa4', state: 'CA', poverty_rate: 10.4, percent_completed_hs: 55.4, deaths: 124},
-    {city: 'CA - Napa5', state: 'CA', poverty_rate: 10.5, percent_completed_hs: 55.5, deaths: 125},
-    {city: 'CA - Napa6', state: 'CA', poverty_rate: 10.6, percent_completed_hs: 55.6, deaths: 126},
-    {city: 'CA - Napa7', state: 'CA', poverty_rate: 10.7, percent_completed_hs: 55.7, deaths: 127},
-    {city: 'CA - Napa8', state: 'CA', poverty_rate: 10.8, percent_completed_hs: 55.8, deaths: 128},
-    {city: 'CA - Napa9', state: 'CA', poverty_rate: 10.9, percent_completed_hs: 55.9, deaths: 129},
+  { city: 'CA - Napa', state: 'CA', share_white: 72.1, share_black: 0.6, share_native_american: 0.8, share_asian: 2.3, share_hispanic: 27.6 },
+  { city: 'CO - Grand Junction', state: 'CO', share_white: 82.7, share_black: 0.8, share_native_american: 1, share_asian: 1.1, share_hispanic: 13.9 },
+  { city: 'NY - Greece', state: 'NY', share_white: 82.2, share_black: 5.4, share_native_american: 0.3, share_asian: 2.4, share_hispanic: 5.4 },
+  { city: 'CA - NAPLES', state: 'CA', share_white: 72.1, share_black: 0.6, share_native_american: 0.8, share_asian: 2.3, share_hispanic: 37.6 },
+  { city: 'CO - GrandJunction2', state: 'CO', share_white: 82.7, share_black: 0.8, share_native_american: 1, share_asian: 1.1, share_hispanic: 13.9 },
+  { city: 'NY - Greececa', state: 'NY', share_white: 82.2, share_black: 5.3, share_native_american: 0.3, share_asian: 2.4, share_hispanic: 5.4 },
+  { city: 'CA - Napa3', state: 'CA', share_white: 72.1, share_black: 0.6, share_native_american: 0.8, share_asian: 2.3, share_hispanic: 37.6 },
+  { city: 'CO - Grand Junction3', state: 'CO', share_white: 82.7, share_black: 0.8, share_native_american: 1, share_asian: 1.1, share_hispanic: 13.9 },
+  { city: 'NY - Greece3', state: 'NY', share_white: 82.2, share_black: 5.2, share_native_american: 0.3, share_asian: 2.4, share_hispanic: 5.4 },
+  { city: 'CA - NAPLES4', state: 'CA', share_white: 72.1, share_black: 0.6, share_native_american: 0.8, share_asian: 2.3, share_hispanic: 37.6 },
+  { city: 'CO - GrandJunction24', state: 'CO', share_white: 82.7, share_black: 0.8, share_native_american: 1, share_asian: 1.1, share_hispanic: 13.9 },
 ];
 
 
-const data_median_income = [
-    {city: 'CA - Napa', state: 'CA', median_income: 55.1, deaths: 120},
-    {city: 'CA - Napa2', state: 'CA', median_income: 55.2, deaths: 122},
-    {city: 'CA - Napa3', state: 'CA', median_income: 55.3, deaths: 123},
-    {city: 'CA - Napa4', state: 'CA', median_income: 55.4, deaths: 124},
-    {city: 'CA - Napa5', state: 'CA', median_income: 55.5, deaths: 125},
-    {city: 'CA - Napa6', state: 'CA', median_income: 55.6, deaths: 126},
-    {city: 'CA - Napa7', state: 'CA', median_income: 55.7, deaths: 127},
-    {city: 'CA - Napa8', state: 'CA', median_income: 55.8, deaths: 128},
-    {city: 'CA - Napa9', state: 'CA', median_income: 55.9, deaths: 129},
-];
+const test_data = [
+  {
+    "asian": 1.7,
+    "black": 1.0,
+    "city": "Kingman",
+    "hispanic": 12.5,
+    "nativeamerican": 1.7,
+    "white": 88.0
+  },
+  {
+    "asian": 5.8,
+    "black": 3.4,
+    "city": "Gilbert",
+    "hispanic": 14.9,
+    "nativeamerican": 0.8,
+    "white": 81.8
+  },
+  {
+    "asian": 0.2,
+    "black": 0.2,
+    "city": "Wilhoit",
+    "hispanic": 9.3,
+    "nativeamerican": 0.7,
+    "white": 94.2
+  },
+  {
+    "asian": 2.6,
+    "black": 5.1,
+    "city": "Surprise",
+    "hispanic": 18.5,
+    "nativeamerican": 0.7,
+    "white": 80.6
+  },
+  {
+    "asian": 0.8,
+    "black": 0.4,
+    "city": "Show Low",
+    "hispanic": 12.8,
+    "nativeamerican": 4.1,
+    "white": 87.6
+  }]
+
+const test_data1 = [
+  {
+    "city": "Prescott",
+    "deaths": 2,
+    "percent_completed_hs": 92.8,
+    "poverty_rate": 15.5
+  },
+  {
+    "city": "Bisbee",
+    "deaths": 1,
+    "percent_completed_hs": 87.3,
+    "poverty_rate": 29.1
+  },
+  {
+    "city": "Golden Shores",
+    "deaths": 1,
+    "percent_completed_hs": 77.9,
+    "poverty_rate": 7.4
+  },
+  {
+    "city": "Mesa",
+    "deaths": 6,
+    "percent_completed_hs": 87.5,
+    "poverty_rate": 16.5
+  },
+  {
+    "city": "Show Low",
+    "deaths": 1,
+    "percent_completed_hs": 88.7,
+    "poverty_rate": 18.4
+  },
+  {
+    "city": "Scottsdale",
+    "deaths": 3,
+    "percent_completed_hs": 96.2,
+    "poverty_rate": 9.5
+  },
+  {
+    "city": "Sun City",
+    "deaths": 2,
+    "percent_completed_hs": 91.0,
+    "poverty_rate": 8.4
+  },
+  {
+    "city": "Lake Havasu City",
+    "deaths": 1,
+    "percent_completed_hs": 88.5,
+    "poverty_rate": 13.8
+  },
+  {
+    "city": "Chandler",
+    "deaths": 2,
+    "percent_completed_hs": 91.5,
+    "poverty_rate": 10.0
+  },
+  {
+    "city": "Maricopa",
+    "deaths": 1,
+    "percent_completed_hs": 91.7,
+    "poverty_rate": 8.1
+  }]
+
+const test_data2 = [
+  {
+    "city": "Kingman",
+    "deaths": 5,
+    "median_income": 43246
+  },
+  {
+    "city": "Gilbert",
+    "deaths": 2,
+    "median_income": 82424
+  },
+  {
+    "city": "Wilhoit",
+    "deaths": 1,
+    "median_income": 34167
+  },
+  {
+    "city": "Surprise",
+    "deaths": 1,
+    "median_income": 59916
+  },
+  {
+    "city": "Show Low",
+    "deaths": 1,
+    "median_income": 42614
+  },
+  {
+    "city": "Flagstaff",
+    "deaths": 3,
+    "median_income": 48680
+  },
+  {
+    "city": "Golden Shores",
+    "deaths": 1,
+    "median_income": 29118
+  },
+  {
+    "city": "Glendale",
+    "deaths": 7,
+    "median_income": 46776
+  },
+  {
+    "city": "Bullhead City",
+    "deaths": 1,
+    "median_income": 35948
+  },
+  {
+    "city": "Lake Havasu City",
+    "deaths": 1,
+    "median_income": 42847
+  }]
 
 const statesAndCities = data.reduce((acc, item) => {
   if (!acc[item.state]) {
@@ -64,12 +188,12 @@ const statesAndCities = data.reduce((acc, item) => {
 }, {});
 
 const statesAndCitiesDeath = data_death.reduce((acc, item) => {
-    if (!acc[item.state]) {
-      acc[item.state] = [];
-    }
-    acc[item.state].push(item);
-    return acc;
-  }, {});
+  if (!acc[item.state]) {
+    acc[item.state] = [];
+  }
+  acc[item.state].push(item);
+  return acc;
+}, {});
 
 function StateCitySelector() {
   const [selectedState, setSelectedState] = useState(Object.keys(statesAndCities)[0]);
@@ -79,120 +203,6 @@ function StateCitySelector() {
     setSelectedState(event.target.value);
   };
 
-  const option = {
-    title: {
-      text: 'Population Percentage',
-      left: 'center',
-      top: '20px',
-    },
-    tooltip: {
-      trigger: 'axis',
-      axisPointer: {
-        type: 'shadow'
-      }
-    },
-    legend: {
-      data: ['White', 'Black', 'Native American', 'Asian', 'Hispanic']
-    },
-    xAxis: [
-      {
-        name: 'City Names',
-        axisLabel: {
-            show: true
-        },
-        type: 'category',
-        axisTick: { show: false },
-        data: statesAndCities[selectedState].map((cityData) => cityData.city)
-      }
-    ],
-    yAxis: [
-      {
-        name: 'Percentage',
-        axisLabel: {
-            show: true
-        },
-        type: 'value',
-        height: '500px'
-      }
-    ],
-    series: [
-      {
-        name: 'White',
-        type: 'bar',
-        stack: 'total',
-        itemStyle: {
-          color: colorScale[0]
-        },
-        label: {
-          show: true
-        },
-        emphasis: {
-          focus: 'series'
-        },
-        data: statesAndCities[selectedState].map((cityData) => cityData.share_white)
-      },
-      {
-        name: 'Black',
-        type: 'bar',
-        stack: 'total',
-        itemStyle: {
-          color: colorScale[1]
-        },
-        label: {
-          show: true
-        },
-        emphasis: {
-          focus: 'series'
-        },
-        data: statesAndCities[selectedState].map((cityData) => cityData.share_black)
-      },
-      {
-        name: 'Native American',
-        type: 'bar',
-        stack: 'total',
-        itemStyle: {
-          color: colorScale[2]
-        },
-        label: {
-          show: true
-        },
-        emphasis: {
-          focus: 'series'
-        },
-        data: statesAndCities[selectedState].map((cityData) => cityData.share_native_american)
-      },
-      {
-        name: 'Asian',
-        type: 'bar',
-        stack: 'total',
-        itemStyle: {
-          color: colorScale[3]
-        },
-        label: {
-          show: true
-        },
-        emphasis: {
-          focus: 'series'
-        },
-        data: statesAndCities[selectedState].map((cityData) => cityData.share_asian)
-      },
-      {
-        name: 'Hispanic',
-        type: 'bar',
-        stack: 'total',
-        itemStyle: {
-          color: colorScale[4]
-        },
-        label: {
-          show: true
-        },
-        emphasis: {
-          focus: 'series'
-        },
-        data: statesAndCities[selectedState].map((cityData) => cityData.share_hispanic)
-      }
-    ]
-  };
 
   const deathOption = {
     title: {
@@ -213,7 +223,7 @@ function StateCitySelector() {
       {
         name: 'City Names',
         axisLabel: {
-            show: true
+          show: true
         },
         type: 'category',
         axisTick: { show: false },
@@ -224,7 +234,7 @@ function StateCitySelector() {
       {
         name: 'Percentage',
         axisLabel: {
-            show: true
+          show: true
         },
         type: 'value',
         height: '500px'
@@ -309,121 +319,31 @@ function StateCitySelector() {
     ]
   };
 
-  const poverty_hs_option = {
-    tooltip: {
-      trigger: 'axis',
-      axisPointer: {
-        type: 'cross',
-      },
-    },
-    xAxis: {
-      type: 'category',
-      data: data_poverty_hs.filter(item => item.state === selectedState).map((item) => item.city),
-    },
-    yAxis: [
-      {
-        type: 'value',
-        name: 'Poverty Rate & HS Completion',
-      },
-      {
-        type: 'value',
-        name: 'Deaths',
-      },
-    ],
-    series: [
-      {
-        name: 'Poverty Rate',
-        data: data_poverty_hs.filter(item => item.state === selectedState).map((item) => item.poverty_rate),
-        type: 'line',
-        color: '#2c3e50',
-        lineStyle: {
-            width: 2,
-        },
-      },
-      {
-        name: 'HS Completion',
-        data: data_poverty_hs.filter(item => item.state === selectedState).map((item) => item.percent_completed_hs),
-        type: 'line',
-        color: '#0077b6',
-        lineStyle: {
-            width: 3,
-        },
-      },
-      {
-        name: 'Deaths',
-        data: data_poverty_hs.filter(item => item.state === selectedState).map((item) => item.deaths),
-        type: 'line',
-        yAxisIndex: 1,
-        color: '#023e8a',
-        lineStyle: {
-            width: 4,
-        },
-      },
-    ],
-  };
 
 
-  const median_income_option = {
-    tooltip: {
-      trigger: 'axis',
-      axisPointer: {
-        type: 'cross',
-      },
-    },
-    xAxis: {
-      type: 'category',
-      data: data_median_income.filter(item => item.state === selectedState).map((item) => item.city),
-    },
-    yAxis: [
-      {
-        type: 'value',
-        name: 'Median Income',
-      },
-      {
-        type: 'value',
-        name: 'Deaths',
-      },
-    ],
-    series: [
-      {
-        name: 'Median Income',
-        data: data_median_income.filter(item => item.state === selectedState).map((item) => item.median_income),
-        type: 'line',
-        color: '#2c3e50',
-        lineStyle: {
-            width: 2,
-        },
-      },
-      {
-        name: 'Deaths',
-        data: data_median_income.filter(item => item.state === selectedState).map((item) => item.deaths),
-        type: 'line',
-        yAxisIndex: 1,
-        color: '#023e8a',
-        lineStyle: {
-            width: 4,
-        },
-      },
-    ],
-  };
+
+
 
   return (
     <div>
-        <div className="dropdown-container">
-            <select className="dropdown" value={selectedState} onChange={handleStateChange}>
-                {Object.keys(statesAndCities).map((state) => (
-                <option key={state} value={state}>
-                    {state}
-                </option>
-                ))}
-            </select>
-        </div>
-        <div className='chart-container'>
-            <ReactECharts option={option}  style={{ height: '400px' }} />
-            <ReactECharts option={deathOption}  style={{ height: '400px' }} />
-            <ReactECharts option={poverty_hs_option} style={{ height: '400px' }} />;
-            <ReactECharts option={median_income_option} style={{ height: '400px' }} />;
-        </div>
+      <div className="dropdown-container">
+        <select className="dropdown" value={selectedState} onChange={handleStateChange}>
+          {Object.keys(statesAndCities).map((state) => (
+            <option key={state} value={state}>
+              {state}
+            </option>
+          ))}
+        </select>
+      </div>
+      <div className='chart-container'>
+        {/* <ReactECharts option={option} style={{ height: '400px' }} /> */}
+        <PopulationChart data={test_data} />
+        <ReactECharts option={deathOption} style={{ height: '400px' }} />
+        {/* <ReactECharts option={poverty_hs_option} style={{ height: '400px' }} />; */}
+        <PovertyGradChart data={test_data1} />
+        {/* <ReactECharts option={median_income_option} style={{ height: '400px' }} />; */}
+        <IncomeChart data={test_data2} />
+      </div>
     </div>
   );
 }
