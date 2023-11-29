@@ -1,8 +1,12 @@
 import React, { useState, useEffect } from 'react';
 import { geoCentroid } from "d3-geo";
 import { ComposableMap, Geographies, Geography, Annotation, Marker } from 'react-simple-maps';
-import ReactECharts from 'echarts-for-react';
-import chroma from 'chroma-js';
+
+import FleeChart from './SummaryComponents/FleeChart';
+import GenderChart from './SummaryComponents/GenderChart';
+import MIChart from './SummaryComponents/MIChart';
+import MoDChart from './SummaryComponents/MoDChart';
+import RaceChart from './SummaryComponents/RaceChart';
 
 const geoUrl = "https://cdn.jsdelivr.net/npm/us-atlas@3/states-10m.json";
 
@@ -128,7 +132,7 @@ const offsets = {
     DC: [49, 21]
 };
 
-const crimeData = {
+const genderCrimeData = {
     'Male': 5000,
     'Female': 3000
 };
@@ -174,184 +178,28 @@ function State() {
     useEffect(() => {
         console.log(selectedYears);
     }, [selectedYears]);
-    const option = {
-        title: {
-            text: 'Gender Crime Data',
-            left: 'center'
-        },
-        tooltip: {
-            trigger: 'item'
-        },
-        legend: {
-            orient: 'vertical',
-            left: 'left'
-        },
-        series: [
-            {
-                name: 'Crimes By',
-                type: 'pie',
-                radius: '50%',
-                data: [
-                    { value: crimeData['Male'], name: 'Male' },
-                    { value: crimeData['Female'], name: 'Female' }
-                ],
-                color: chroma.scale(['#2c3e50', '#ecf0f1']).mode('lch').colors(2),
-                emphasis: {
-                    itemStyle: {
-                        shadowBlur: 10,
-                        shadowOffsetX: 0,
-                        shadowColor: 'rgba(0, 0, 0, 0.5)'
-                    }
-                }
-            }
-        ]
-    };
-
-    const raceOption = {
-        title: {
-            text: 'Race Crime Data',
-            left: 'center'
-        },
-        tooltip: {
-            trigger: 'item'
-        },
-        legend: {
-            orient: 'vertical',
-            left: 'left'
-        },
-        series: [
-            {
-                name: 'Crimes By',
-                type: 'pie',
-                radius: '50%',
-                data: Object.entries(raceCrimeData).map(([name, value]) => ({ name, value })),
-                color: chroma.scale(['#2c3e50', '#ecf0f1']).mode('lch').colors(5),
-                emphasis: {
-                    itemStyle: {
-                        shadowBlur: 10,
-                        shadowOffsetX: 0,
-                        shadowColor: 'rgba(0, 0, 0, 0.5)'
-                    }
-                }
-            }
-        ]
-    };
-
-    const mannerOfDeathOption = {
-        title: {
-            text: 'Manner of Death Data',
-            left: 'center'
-        },
-        tooltip: {
-            trigger: 'item'
-        },
-        legend: {
-            orient: 'vertical',
-            left: 'left'
-        },
-        series: [
-            {
-                name: 'Deaths By',
-                type: 'pie',
-                radius: '50%',
-                data: Object.entries(mannerOfDeathData).map(([name, value]) => ({ name, value })),
-                color: chroma.scale(['#2c3e50', '#ecf0f1']).mode('lch').colors(2),
-                emphasis: {
-                    itemStyle: {
-                        shadowBlur: 10,
-                        shadowOffsetX: 0,
-                        shadowColor: 'rgba(0, 0, 0, 0.5)'
-                    }
-                }
-            }
-        ]
-    };
-
-    const fleeOption = {
-        title: {
-            text: 'Flee Data',
-            left: 'center'
-        },
-        tooltip: {
-            trigger: 'item'
-        },
-        legend: {
-            orient: 'vertical',
-            left: 'left'
-        },
-        series: [
-            {
-                name: 'Flee By',
-                type: 'pie',
-                radius: '50%',
-                data: Object.entries(fleeData).map(([name, value]) => ({ name, value })),
-                color: chroma.scale(['#2c3e50', '#ecf0f1']).mode('lch').colors(4),
-                emphasis: {
-                    itemStyle: {
-                        shadowBlur: 10,
-                        shadowOffsetX: 0,
-                        shadowColor: 'rgba(0, 0, 0, 0.5)'
-                    }
-                }
-            }
-        ]
-    };
-
-    const mentalIllnessOption = {
-        title: {
-            text: 'Mental Illness Data',
-            left: 'center'
-        },
-        tooltip: {
-            trigger: 'item',
-            formatter: function(params) {
-                return params.name === 'TRUE' ? 'Yes: ' + params.value : 'No: ' + params.value;
-            }
-        },
-        legend: {
-            orient: 'vertical',
-            left: 'left',
-            data: ['Yes', 'No']
-        },
-        series: [
-            {
-                name: 'Mental Illness',
-                type: 'pie',
-                radius: '50%',
-                data: Object.entries(mentalIllnessData).map(([name, value]) => ({ name: name === 'TRUE' ? 'Yes' : 'No', value })),
-                color: chroma.scale(['#2c3e50', '#ecf0f1']).mode('lch').colors(2),
-                emphasis: {
-                    itemStyle: {
-                        shadowBlur: 10,
-                        shadowOffsetX: 0,
-                        shadowColor: 'rgba(0, 0, 0, 0.5)'
-                    }
-                }
-            }
-        ]
-    };
 
     return (
-        <div style={{height: '40%'}}>
+        <div style={{ height: '40%' }}>
             <div>
                 <label>
-                        Select Years:
-                    </label>
-                    <label>
-                        <input type="checkbox" value="2015" onChange={handleCheckboxChange} checked={selectedYears.includes('2015')} />
-                        2015
-                    </label>
-                    <label>
-                        <input type="checkbox" value="2016" onChange={handleCheckboxChange} checked={selectedYears.includes('2016')} />
-                        2016
-                    </label>
-                    <label>
-                        <input type="checkbox" value="2017" onChange={handleCheckboxChange} checked={selectedYears.includes('2017')} />
-                        2017
+                    Select Years:
+                </label>
+                <label>
+                    <input type="checkbox" value="2015" onChange={handleCheckboxChange} checked={selectedYears.includes('2015')} />
+                    2015
+                </label>
+                <label>
+                    <input type="checkbox" value="2016" onChange={handleCheckboxChange} checked={selectedYears.includes('2016')} />
+                    2016
+                </label>
+                <label>
+                    <input type="checkbox" value="2017" onChange={handleCheckboxChange} checked={selectedYears.includes('2017')} />
+                    2017
                 </label>
             </div>
             <div style={{ display: 'flex', flexDirection: 'row', alignItems: 'center' }}>
-                
+
                 <div style={{ width: '50%' }}>
                     <ComposableMap projection="geoAlbersUsa">
                         <Geographies geography={geoUrl}>
@@ -403,21 +251,21 @@ function State() {
                 </div>
                 <div style={{ width: '25%', height: '40%' }}>
                     <div style={{ height: '20%' }}>
-                        <ReactECharts option={option} />
+                        <GenderChart data={genderCrimeData} />
                     </div>
                     <div style={{ height: '20%' }}>
-                        <ReactECharts option={raceOption} />
+                        <RaceChart data={raceCrimeData} />
                     </div>
                     <div style={{ height: '20%' }}>
-                        <ReactECharts option={mannerOfDeathOption} />
+                        <MoDChart data={mannerOfDeathData} />
                     </div>
                 </div>
                 <div style={{ width: '25%', height: '40%' }}>
                     <div style={{ height: '20%' }}>
-                        <ReactECharts option={fleeOption} />
+                        <FleeChart data={fleeData} />
                     </div>
                     <div style={{ height: '20%' }}>
-                        <ReactECharts option={mentalIllnessOption} />
+                        <MIChart data={mentalIllnessData} />
                     </div>
                 </div>
             </div>
