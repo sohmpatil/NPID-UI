@@ -11,7 +11,7 @@ export default function MIChart({ data }) {
         tooltip: {
             trigger: 'item',
             formatter: function (params) {
-                return params.name === 'TRUE' ? 'Yes: ' + params.value : 'No: ' + params.value;
+                return params.name === 'yes' ? 'Yes: ' + params.value : 'No: ' + params.value;
             }
         },
         legend: {
@@ -24,7 +24,7 @@ export default function MIChart({ data }) {
                 name: 'Mental Illness',
                 type: 'pie',
                 radius: '50%',
-                data: Object.entries(data).map(([name, value]) => ({ name: name === 'TRUE' ? 'Yes' : 'No', value })),
+                data: Object.entries(data).map(([name, value]) => ({ name: name === 'yes' ? 'Yes' : 'No', value })),
                 color: chroma.scale(['#2c3e50', '#ecf0f1']).mode('lch').colors(2),
                 emphasis: {
                     itemStyle: {

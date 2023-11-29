@@ -71,8 +71,13 @@ const offsets = {
     DC: [49, 21]
 };
 
-export default function MapChart({ data }) {
+export default function MapChart({ data, onStateClick }) {
     const maxMurder = Math.max(...Object.values(data));
+
+    const handleStateClick = (geography) => {
+        const clickedState = stateMappings[geography.properties.name];
+        onStateClick(clickedState);
+    };
 
     return (
         <ComposableMap projection="geoAlbersUsa">
@@ -86,7 +91,8 @@ export default function MapChart({ data }) {
                                     key={geo.rsmKey}
                                     geography={geo}
                                     fill={cur ? `rgba(44, 62, 80, ${0.1 + 0.9 * cur / maxMurder})` : "#D3D3D3"}
-                                    onClick={() => console.log(stateMappings[geo.properties.name])}
+                                    onClick={() => handleStateClick(geo)}
+                                // onClick={() => console.log(stateMappings[geo.properties.name])}
                                 />
                             );
                         })}
