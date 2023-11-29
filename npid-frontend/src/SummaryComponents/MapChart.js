@@ -1,4 +1,5 @@
-import React from 'react';
+import React, { useState } from 'react';
+import './MapChart.css'
 import { geoCentroid } from "d3-geo";
 import { ComposableMap, Geographies, Geography, Annotation, Marker } from 'react-simple-maps';
 
@@ -78,8 +79,13 @@ export default function MapChart({ data, onStateClick }) {
         const clickedState = stateMappings[geography.properties.name];
         onStateClick(clickedState);
     };
+    const [tooltipContent, setTooltipContent] = useState('');
+    const [tooltipPosition, setTooltipPosition] = useState({ x: 0, y: 0 });
+    const [tooltipDisplay, setTooltipDisplay] = useState('none');
+
 
     return (
+        <>
         <ComposableMap projection="geoAlbersUsa">
             <Geographies geography={geoUrl}>
                 {({ geographies }) => (
@@ -92,7 +98,22 @@ export default function MapChart({ data, onStateClick }) {
                                     geography={geo}
                                     fill={cur ? `rgba(44, 62, 80, ${0.1 + 0.9 * cur / maxMurder})` : "#D3D3D3"}
                                     onClick={() => handleStateClick(geo)}
-                                // onClick={() => console.log(stateMappings[geo.properties.name])}
+                                    onMouseEnter={(evt) => {
+                                        const { name } = geo.properties;
+                                        setTooltipContent(`${name}: ${cur}`);
+                                        setTooltipPosition({ x: evt.clientX, y: evt.clientY });
+                                        setTooltipDisplay('block');
+                                    }}
+                                    onMouseMove={(evt) => {
+                                        const { name } = geo.properties;
+                                        setTooltipContent(`${name}: ${cur}`);
+                                        setTooltipPosition({ x: evt.clientX, y: evt.clientY });
+                                        setTooltipDisplay('block'); // Show the tooltip
+                                    }}
+                                    onMouseLeave={() => {
+                                        setTooltipContent('');
+                                        setTooltipDisplay('none'); 
+                                    }}
                                 />
                             );
                         })}
@@ -128,5 +149,7 @@ export default function MapChart({ data, onStateClick }) {
                 )}
             </Geographies>
         </ComposableMap>
+        <div className="tooltip" style={{ left: `${tooltipPosition.x}px`, top: `${tooltipPosition.y}px`, display: tooltipDisplay }}>{tooltipContent}</div>
+        </>
     )
 }
