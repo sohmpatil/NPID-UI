@@ -22,7 +22,7 @@ export default function RaceChart({ data }) {
                 type: 'pie',
                 radius: '50%',
                 data: Object.entries(data).map(([name, value]) => ({ name, value })),
-                color: chroma.scale(['#2c3e50', '#ecf0f1']).mode('lch').colors(5),
+                color: chroma.scale(['#2c3e50', '#ecf0f1']).mode('lch').colors(6),
                 emphasis: {
                     itemStyle: {
                         shadowBlur: 10,

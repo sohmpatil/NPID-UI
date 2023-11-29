@@ -21,11 +21,8 @@ export default function GenderChart({ data }) {
                 name: 'Crimes By',
                 type: 'pie',
                 radius: '50%',
-                data: [
-                    { value: data['Male'], name: 'Male' },
-                    { value: data['Female'], name: 'Female' }
-                ],
-                color: chroma.scale(['#2c3e50', '#ecf0f1']).mode('lch').colors(2),
+                data: Object.entries(data).map(([name, value]) => ({ name, value })),
+                color: chroma.scale(['#ecf0f1', '#2c3e50']).mode('lch').colors(2),
                 emphasis: {
                     itemStyle: {
                         shadowBlur: 10,
