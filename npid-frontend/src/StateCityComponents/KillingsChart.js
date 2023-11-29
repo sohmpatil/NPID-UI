@@ -9,7 +9,7 @@ export default function KillingsChart({ data }) {
 
     const option = {
         title: {
-            text: 'Death Percentage',
+            text: 'Death Count',
             left: 'center',
             top: '20px',
         },

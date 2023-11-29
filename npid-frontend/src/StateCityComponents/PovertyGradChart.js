@@ -3,6 +3,11 @@ import ReactECharts from 'echarts-for-react';
 
 export default function PovertyGradChart({ data }) {
     const option = {
+        title: {
+            text: 'Poverty and Highschool Completion Rate vs Deaths',
+            left: 'center',
+            top: '20px',
+        },
         tooltip: {
             trigger: 'axis',
             axisPointer: {

@@ -4,6 +4,11 @@ import ReactECharts from 'echarts-for-react';
 
 export default function IncomeChart({ data }) {
     const option = {
+        title: {
+            text: 'Median Income vs Deaths',
+            left: 'center',
+            top: '20px',
+        },
         tooltip: {
             trigger: 'axis',
             axisPointer: {
