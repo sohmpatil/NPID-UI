@@ -33,7 +33,7 @@ function Detailed() {
                 <td>{val.name}</td>
                 <td>{val.race}</td>
                 <td>{val.age}</td>
-                <td>{val.deathYear}</td>
+                <td>{val.deathyear}</td>
                 <td>{val.gender}</td>
                 <td>{val.mentalillness}</td>
                 <td>{val.mannerofdeath}</td>
