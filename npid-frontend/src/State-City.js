@@ -1,11 +1,11 @@
 import React, { useState } from 'react';
-import ReactECharts from 'echarts-for-react';
 import './StateCitySelector.css';
 import chroma from 'chroma-js';
 
 import PopulationChart from './StateCityComponents/PopulationChart';
 import PovertyGradChart from './StateCityComponents/PovertyGradChart';
 import IncomeChart from './StateCityComponents/IncomeChart';
+import KillingsChart from './StateCityComponents/KillingsChart';
 
 
 const data_death = [
@@ -22,6 +22,7 @@ const data_death = [
   { city: 'CO - GrandJunction24', state: 'CO', share_white: 82.7, share_black: 0.8, share_native_american: 1, share_asian: 1.1, share_hispanic: 13.9 },
 ];
 
+const data = []
 
 const test_data = [
   {
@@ -179,6 +180,56 @@ const test_data2 = [
     "median_income": 42847
   }]
 
+const test_data3 = [
+  {
+    "asian": 0,
+    "black": 0,
+    "city": "Bisbee",
+    "hispanic": 1,
+    "nativeamerican": 0,
+    "white": 0
+  },
+  {
+    "asian": 0,
+    "black": 0,
+    "city": "Kearny",
+    "hispanic": 0,
+    "nativeamerican": 0,
+    "white": 1
+  },
+  {
+    "asian": 0,
+    "black": 0,
+    "city": "Marana",
+    "hispanic": 0,
+    "nativeamerican": 0,
+    "white": 1
+  },
+  {
+    "asian": 0,
+    "black": 0,
+    "city": "Kingman",
+    "hispanic": 1,
+    "nativeamerican": 0,
+    "white": 4
+  },
+  {
+    "asian": 0,
+    "black": 0,
+    "city": "Bullhead City",
+    "hispanic": 0,
+    "nativeamerican": 0,
+    "white": 1
+  },
+  {
+    "asian": 0,
+    "black": 1,
+    "city": "Scottsdale",
+    "hispanic": 0,
+    "nativeamerican": 0,
+    "white": 2
+  }]
+
 const statesAndCities = data.reduce((acc, item) => {
   if (!acc[item.state]) {
     acc[item.state] = [];
@@ -203,127 +254,6 @@ function StateCitySelector() {
     setSelectedState(event.target.value);
   };
 
-
-  const deathOption = {
-    title: {
-      text: 'Death Percentage',
-      left: 'center',
-      top: '20px',
-    },
-    tooltip: {
-      trigger: 'axis',
-      axisPointer: {
-        type: 'shadow'
-      }
-    },
-    legend: {
-      data: ['White', 'Black', 'Native American', 'Asian', 'Hispanic']
-    },
-    xAxis: [
-      {
-        name: 'City Names',
-        axisLabel: {
-          show: true
-        },
-        type: 'category',
-        axisTick: { show: false },
-        data: statesAndCitiesDeath[selectedState].map((cityData) => cityData.city)
-      }
-    ],
-    yAxis: [
-      {
-        name: 'Percentage',
-        axisLabel: {
-          show: true
-        },
-        type: 'value',
-        height: '500px'
-      }
-    ],
-    series: [
-      {
-        name: 'White',
-        type: 'bar',
-        stack: 'total',
-        itemStyle: {
-          color: colorScale[0]
-        },
-        label: {
-          show: true
-        },
-        emphasis: {
-          focus: 'series'
-        },
-        data: statesAndCitiesDeath[selectedState].map((cityData) => cityData.share_white)
-      },
-      {
-        name: 'Black',
-        type: 'bar',
-        stack: 'total',
-        itemStyle: {
-          color: colorScale[1]
-        },
-        label: {
-          show: true
-        },
-        emphasis: {
-          focus: 'series'
-        },
-        data: statesAndCitiesDeath[selectedState].map((cityData) => cityData.share_black)
-      },
-      {
-        name: 'Native American',
-        type: 'bar',
-        stack: 'total',
-        itemStyle: {
-          color: colorScale[2]
-        },
-        label: {
-          show: true
-        },
-        emphasis: {
-          focus: 'series'
-        },
-        data: statesAndCitiesDeath[selectedState].map((cityData) => cityData.share_native_american)
-      },
-      {
-        name: 'Asian',
-        type: 'bar',
-        stack: 'total',
-        itemStyle: {
-          color: colorScale[3]
-        },
-        label: {
-          show: true
-        },
-        emphasis: {
-          focus: 'series'
-        },
-        data: statesAndCitiesDeath[selectedState].map((cityData) => cityData.share_asian)
-      },
-      {
-        name: 'Hispanic',
-        type: 'bar',
-        stack: 'total',
-        itemStyle: {
-          color: colorScale[4]
-        },
-        label: {
-          show: true
-        },
-        emphasis: {
-          focus: 'series'
-        },
-        data: statesAndCitiesDeath[selectedState].map((cityData) => cityData.share_hispanic)
-      }
-    ]
-  };
-
-
-
-
-
-
   return (
     <div>
       <div className="dropdown-container">
@@ -338,7 +268,8 @@ function StateCitySelector() {
       <div className='chart-container'>
         {/* <ReactECharts option={option} style={{ height: '400px' }} /> */}
         <PopulationChart data={test_data} />
-        <ReactECharts option={deathOption} style={{ height: '400px' }} />
+        {/* <ReactECharts option={deathOption} style={{ height: '400px' }} /> */}
+        <KillingsChart data={test_data3} />
         {/* <ReactECharts option={poverty_hs_option} style={{ height: '400px' }} />; */}
         <PovertyGradChart data={test_data1} />
         {/* <ReactECharts option={median_income_option} style={{ height: '400px' }} />; */}

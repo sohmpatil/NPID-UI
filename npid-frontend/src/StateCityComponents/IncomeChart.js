@@ -1,6 +1,6 @@
-import React, { useState } from 'react';
+import React from 'react';
 import ReactECharts from 'echarts-for-react';
-import chroma from 'chroma-js';
+
 
 export default function IncomeChart({ data }) {
     const option = {
