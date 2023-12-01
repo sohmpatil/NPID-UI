@@ -224,25 +224,25 @@ function StateCitySelector() {
   const [incomeChartData, setincomeChartData] = useState(null);
 
   useEffect(() => {
-    axios.get('http://127.0.0.1:5000//api/statecity/states')
+    axios.get('http://54.159.184.217:5000//api/statecity/states')
       .then(response => setDropdownStates(response.data))
       .catch(error => console.error('Error fetching dropdown values:', error));
   }, []);
 
   useEffect(() => {
-    axios.get(`http://127.0.0.1:5000/api/statecity/cityrace?state=${selectedState}`)
+    axios.get(`http://54.159.184.217:5000/api/statecity/cityrace?state=${selectedState}`)
       .then(response => setpopulationChartData(response.data))
       .catch(error => console.error('Error fetching bar chart data:', error));
 
-    axios.get(`http://127.0.0.1:5000/api/statecity/cityracevictimcount?state=${selectedState}`)
+    axios.get(`http://54.159.184.217:5000/api/statecity/cityracevictimcount?state=${selectedState}`)
       .then(response => setkillingsChartData(response.data))
       .catch(error => console.error('Error fetching line chart data:', error));
 
-    axios.get(`http://127.0.0.1:5000/api/statecity/rates?state=${selectedState}`)
+    axios.get(`http://54.159.184.217:5000/api/statecity/rates?state=${selectedState}`)
       .then(response => setpovertygradChartData(response.data))
       .catch(error => console.error('Error fetching line chart data:', error));
 
-    axios.get(`http://127.0.0.1:5000/api/statecity/income?state=${selectedState}`)
+    axios.get(`http://54.159.184.217:5000/api/statecity/income?state=${selectedState}`)
       .then(response => setincomeChartData(response.data))
       .catch(error => console.error('Error fetching line chart data:', error));
 

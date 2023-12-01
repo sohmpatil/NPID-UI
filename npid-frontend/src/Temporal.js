@@ -23,12 +23,12 @@ function DeathChart() {
 
   useEffect(() => {
     // Fetch bar chart data
-    axios.get('http://127.0.0.1:5000/api/temporal/count')
+    axios.get('http://54.159.184.217:5000/api/temporal/count')
       .then(response => setBarChartData(response.data))
       .catch(error => console.error('Error fetching bar chart data:', error));
 
     // Fetch line chart data
-    axios.get('http://127.0.0.1:5000/api/temporal/racecount')
+    axios.get('http://54.159.184.217:5000/api/temporal/racecount')
       .then(response => setLineChartData(response.data))
       .catch(error => console.error('Error fetching line chart data:', error));
   }, []);

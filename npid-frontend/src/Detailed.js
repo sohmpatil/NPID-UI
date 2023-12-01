@@ -8,7 +8,7 @@ function Detailed() {
 
   useEffect(() => {
     // Fetch table chart data
-    axios.get('http://127.0.0.1:5000/api/details')
+    axios.get('http://54.159.184.217:5000/api/details')
       .then(response => setData(response.data))
       .catch(error => console.error('Error fetching table data:', error));
   }, []);
