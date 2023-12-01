@@ -1,5 +1,5 @@
 .home-container {
-    display: flex;
+    display: inline-block;
     justify-content: center;
     align-items: center;
     /* height: 100vh; */
@@ -8,4 +8,10 @@
 
 .home-container h1 {
     font-size: 50px;
+    
 }
+
+.home-container p {
+    font-size:  20px;
+}
+
