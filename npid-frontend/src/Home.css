@@ -1,11 +1,17 @@
 .home-container {
-    display: flex;
+    display: inline-block;
     justify-content: center;
     align-items: center;
-    height: 100vh;
+    /* height: 100vh; */
     text-align: center;
 }
 
 .home-container h1 {
     font-size: 50px;
+    
 }
+
+.home-container p {
+    font-size:  20px;
+}
+
