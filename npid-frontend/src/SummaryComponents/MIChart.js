@@ -11,7 +11,7 @@ export default function MIChart({ data }) {
         tooltip: {
             trigger: 'item',
             formatter: function (params) {
-                return params.name === 'yes' ? 'Yes: ' + params.value : 'No: ' + params.value;
+                return params.name === 'Yes' ? 'Yes: ' + params.value : 'No: ' + params.value;
             }
         },
         legend: {

@@ -18,7 +18,7 @@ export default function GenderChart({ data }) {
         },
         series: [
             {
-                name: 'Crimes By',
+                name: 'Crimes Against',
                 type: 'pie',
                 radius: '50%',
                 data: Object.entries(data).map(([name, value]) => ({ name, value })),
