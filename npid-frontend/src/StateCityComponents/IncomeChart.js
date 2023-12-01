@@ -15,9 +15,17 @@ export default function IncomeChart({ data }) {
                 type: 'cross',
             },
         },
+        legend: {
+            data: ['Median Income', 'Deaths']
+        },
         xAxis: {
             type: 'category',
             data: data.map((item) => item.city),
+            axisLabel: {
+                show: true,
+                rotate: 90,
+                interval: 0
+            },
         },
         yAxis: [
             {

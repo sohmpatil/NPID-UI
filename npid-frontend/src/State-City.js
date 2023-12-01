@@ -214,6 +214,61 @@ import KillingsChart from './StateCityComponents/KillingsChart';
 //     "white": 2
 //   }]
 
+const stateMappings = {
+  'AL': 'Alabama',
+  'AK': 'Alaska',
+  'AZ': 'Arizona',
+  'AR': 'Arkansas',
+  'CA': 'California',
+  'CO': 'Colorado',
+  'CT': 'Connecticut',
+  'DE': 'Delaware',
+  'DC': 'District of Columbia',
+  'FL': 'Florida',
+  'GA': 'Georgia',
+  'HI': 'Hawaii',
+  'ID': 'Idaho',
+  'IL': 'Illinois',
+  'IN': 'Indiana',
+  'IA': 'Iowa',
+  'KS': 'Kansas',
+  'KY': 'Kentucky',
+  'LA': 'Louisiana',
+  'ME': 'Maine',
+  'MD': 'Maryland',
+  'MA': 'Massachusetts',
+  'MI': 'Michigan',
+  'MN': 'Minnesota',
+  'MS': 'Mississippi',
+  'MO': 'Missouri',
+  'MT': 'Montana',
+  'NE': 'Nebraska',
+  'NV': 'Nevada',
+  'NH': 'New Hampshire',
+  'NJ': 'New Jersey',
+  'NM': 'New Mexico',
+  'NY': 'New York',
+  'NC': 'North Carolina',
+  'ND': 'North Dakota',
+  'OH': 'Ohio',
+  'OK': 'Oklahoma',
+  'OR': 'Oregon',
+  'PA': 'Pennsylvania',
+  'RI': 'Rhode Island',
+  'SC': 'South Carolina',
+  'SD': 'South Dakota',
+  'TN': 'Tennessee',
+  'TX': 'Texas',
+  'UT': 'Utah',
+  'VT': 'Vermont',
+  'VA': 'Virginia',
+  'WA': 'Washington',
+  'WV': 'West Virginia',
+  'WI': 'Wisconsin',
+  'WY': 'Wyoming',
+  'PR': 'Puerto Rico',
+};
+
 function StateCitySelector() {
   const [dropdownStates, setDropdownStates] = useState(['AZ']);
   const [selectedState, setSelectedState] = useState('AZ');
@@ -257,12 +312,12 @@ function StateCitySelector() {
   return (
     <div>
       <div className="dropdown-container">
-        <select className='dropdown' value={selectedState} onChange={handleDropdownChange}>
-          <option value="AZ">AZ</option>
+      <select className='dropdown' value={selectedState} onChange={handleDropdownChange}>
+          <option value="AZ">Arizona</option>
           {dropdownStates.map(value => (
-            <option key={value} value={value}>{value}</option>
+              <option key={value} value={value}>{stateMappings[value]}</option>
           ))}
-        </select>
+      </select>
       </div>
       <div className='chart-container'>
         {populationChartData ? <PopulationChart data={populationChartData} /> : 'Loading Chart...'}

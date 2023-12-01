@@ -26,7 +26,9 @@ export default function PopulationChart({ data }) {
             {
                 name: 'City Names',
                 axisLabel: {
-                    show: true
+                    show: true,
+                    rotate: 90,
+                    interval: 0
                 },
                 type: 'category',
                 axisTick: { show: false },
@@ -52,7 +54,7 @@ export default function PopulationChart({ data }) {
                     color: colorScale[0]
                 },
                 label: {
-                    show: true
+                    show: false
                 },
                 emphasis: {
                     focus: 'series'
@@ -67,7 +69,7 @@ export default function PopulationChart({ data }) {
                     color: colorScale[1]
                 },
                 label: {
-                    show: true
+                    show: false
                 },
                 emphasis: {
                     focus: 'series'
@@ -82,7 +84,7 @@ export default function PopulationChart({ data }) {
                     color: colorScale[2]
                 },
                 label: {
-                    show: true
+                    show: false
                 },
                 emphasis: {
                     focus: 'series'
@@ -97,7 +99,7 @@ export default function PopulationChart({ data }) {
                     color: colorScale[3]
                 },
                 label: {
-                    show: true
+                    show: false
                 },
                 emphasis: {
                     focus: 'series'
@@ -112,7 +114,7 @@ export default function PopulationChart({ data }) {
                     color: colorScale[4]
                 },
                 label: {
-                    show: true
+                    show: false
                 },
                 emphasis: {
                     focus: 'series'

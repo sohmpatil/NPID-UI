@@ -42,6 +42,7 @@ export default function LineChart({ data }) {
             data: Object.values(data[race])
         })),
         legend: {
+            top: '350px',
             data: Object.keys(data)
         },
     };

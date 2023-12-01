@@ -14,9 +14,17 @@ export default function PovertyGradChart({ data }) {
                 type: 'cross',
             },
         },
+        legend: {
+            data: ['Poverty Rate', 'HS Completion', 'Deaths']
+        },
         xAxis: {
             type: 'category',
             data: data.map((item) => item.city),
+            axisLabel: {
+                show: true,
+                rotate: 90,
+                interval: 0
+            },
         },
         yAxis: [
             {
