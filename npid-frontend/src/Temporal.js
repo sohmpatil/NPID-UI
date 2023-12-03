@@ -17,21 +17,21 @@ import LineChart from './TemporalComponents/LineChart';
 //   "Hispanic": { "2015": 4324, "2016": 5435, "2017": 4533 }
 // };
 
-function DeathChart() {
+function DeathChart({backendURL}) {
   const [barChartData, setBarChartData] = useState(null);
   const [lineChartData, setLineChartData] = useState(null);
 
   useEffect(() => {
     // Fetch bar chart data
-    axios.get('http://127.0.0.1:5000/api/temporal/count')
+    axios.get(backendURL + '/api/temporal/count')
       .then(response => setBarChartData(response.data))
       .catch(error => console.error('Error fetching bar chart data:', error));
 
     // Fetch line chart data
-    axios.get('http://127.0.0.1:5000/api/temporal/racecount')
+    axios.get(backendURL + '/api/temporal/racecount')
       .then(response => setLineChartData(response.data))
       .catch(error => console.error('Error fetching line chart data:', error));
-  }, []);
+  }, [backendURL]);
 
   return (
     <div>

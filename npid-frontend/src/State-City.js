@@ -269,7 +269,7 @@ const stateMappings = {
   'PR': 'Puerto Rico',
 };
 
-function StateCitySelector() {
+function StateCitySelector({backendURL}) {
   const [dropdownStates, setDropdownStates] = useState(['AZ']);
   const [selectedState, setSelectedState] = useState('AZ');
 
@@ -279,30 +279,30 @@ function StateCitySelector() {
   const [incomeChartData, setincomeChartData] = useState(null);
 
   useEffect(() => {
-    axios.get('http://127.0.0.1:5000//api/statecity/states')
+    axios.get(backendURL + '//api/statecity/states')
       .then(response => setDropdownStates(response.data))
       .catch(error => console.error('Error fetching dropdown values:', error));
-  }, []);
+  }, [backendURL]);
 
   useEffect(() => {
-    axios.get(`http://127.0.0.1:5000/api/statecity/cityrace?state=${selectedState}`)
+    axios.get(backendURL + `/api/statecity/cityrace?state=${selectedState}`)
       .then(response => setpopulationChartData(response.data))
       .catch(error => console.error('Error fetching bar chart data:', error));
 
-    axios.get(`http://127.0.0.1:5000/api/statecity/cityracevictimcount?state=${selectedState}`)
+    axios.get(backendURL + `/api/statecity/cityracevictimcount?state=${selectedState}`)
       .then(response => setkillingsChartData(response.data))
       .catch(error => console.error('Error fetching line chart data:', error));
 
-    axios.get(`http://127.0.0.1:5000/api/statecity/rates?state=${selectedState}`)
+    axios.get(backendURL + `/api/statecity/rates?state=${selectedState}`)
       .then(response => setpovertygradChartData(response.data))
       .catch(error => console.error('Error fetching line chart data:', error));
 
-    axios.get(`http://127.0.0.1:5000/api/statecity/income?state=${selectedState}`)
+    axios.get(backendURL + `/api/statecity/income?state=${selectedState}`)
       .then(response => setincomeChartData(response.data))
       .catch(error => console.error('Error fetching line chart data:', error));
 
 
-  }, [selectedState]);
+  }, [selectedState, backendURL]);
 
   const handleDropdownChange = (event) => {
     const newState = event.target.value;

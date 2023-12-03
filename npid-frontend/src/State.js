@@ -96,7 +96,7 @@ import RaceChart from './SummaryComponents/RaceChart';
 //     'FALSE': 7000
 // };
 
-function State() {
+function State({backendURL}) {
     const [selectedYears, setSelectedYears] = useState(['2015', '2016', '2017']);
     const [selectedState, setSelectedState] = useState('');
 
@@ -125,40 +125,40 @@ function State() {
         const year_query = selectedYears.map(year => `year=${year}`).join('&');
         const state_query = (selectedState === '') ? '' : `&state=${selectedState}`;
 
-        axios.get(`http://127.0.0.1:5000/api/summary/map?${year_query}`)
+        axios.get(backendURL + `/api/summary/map?${year_query}`)
             .then(response => setmapChartData(response.data))
             .catch(error => console.error('Error fetching bar chart data:', error));
 
-        axios.get(`http://127.0.0.1:5000/api/summary/fleeing?${year_query}${state_query}`)
+        axios.get(backendURL + `/api/summary/fleeing?${year_query}${state_query}`)
             .then(response => setfleeChartData(response.data))
             .catch(error => console.error('Error fetching bar chart data:', error));
 
-        axios.get(`http://127.0.0.1:5000/api/summary/gender?${year_query}${state_query}`)
+        axios.get(backendURL + `/api/summary/gender?${year_query}${state_query}`)
             .then(response => setgenderChartData(response.data))
             .catch(error => console.error('Error fetching bar chart data:', error));
 
-        axios.get(`http://127.0.0.1:5000/api/summary/mentalillness?${year_query}${state_query}`)
+        axios.get(backendURL + `/api/summary/mentalillness?${year_query}${state_query}`)
             .then(response => setmiChartData(response.data))
             .catch(error => console.error('Error fetching bar chart data:', error));
 
-        axios.get(`http://127.0.0.1:5000/api/summary/mannerofdeath?${year_query}${state_query}`)
+        axios.get(backendURL + `/api/summary/mannerofdeath?${year_query}${state_query}`)
             .then(response => setmodChartData(response.data))
             .catch(error => console.error('Error fetching bar chart data:', error));
 
-        axios.get(`http://127.0.0.1:5000/api/summary/race?${year_query}${state_query}`)
+        axios.get(backendURL + `/api/summary/race?${year_query}${state_query}`)
             .then(response => setraceChartData(response.data))
             .catch(error => console.error('Error fetching bar chart data:', error));
 
 
-    }, [selectedYears, selectedState]);
+    }, [selectedYears, selectedState, backendURL]);
 
     useEffect(() => {
         const year_query = selectedYears.map(year => `year=${year}`).join('&');
 
-        axios.get(`http://127.0.0.1:5000/api/summary/map?${year_query}`)
+        axios.get(backendURL + `/api/summary/map?${year_query}`)
             .then(response => setmapChartData(response.data))
             .catch(error => console.error('Error fetching bar chart data:', error));
-    }, [selectedYears]);
+    }, [selectedYears, backendURL]);
 
     return (
         <div style={{ height: '40%' }}>

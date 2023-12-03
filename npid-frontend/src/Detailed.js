@@ -2,16 +2,16 @@ import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 import './Detailed.css';
 
-function Detailed() {
+function Detailed({backendURL}) {
 
   const [data, setData] = useState(null);
 
   useEffect(() => {
     // Fetch table chart data
-    axios.get('http://127.0.0.1:5000/api/details')
+    axios.get(backendURL + '/api/details')
       .then(response => setData(response.data))
       .catch(error => console.error('Error fetching table data:', error));
-  }, []);
+  }, [backendURL]);
 
   return (
     <div className="Detailed Detailed-Table">
